@@ -10,10 +10,11 @@ namespace Notes
     public class TreeInteractor : MonoBehaviour
     {
         [SerializeField] private RectTransform _interactView = null;
+        [SerializeField] private Projector _projectorPrefab = null;
         [SerializeField] private InterfaceReference<IReadOnlyInput> _input = null;
         [SerializeField] private float _interactDistance = 3;
 
-        private Transform _active = null;
+        private RaycastHit _lastResult = default;
 
         private void OnEnable()
         {
@@ -32,7 +33,7 @@ namespace Notes
 
         private void Update()
         {
-            if (!Physics.Raycast(transform.position, transform.forward, out var result, _interactDistance) || !result.transform.TryGetComponent(out _active))
+            if (!Physics.Raycast(transform.position, transform.forward, out _lastResult, _interactDistance) || _lastResult.transform.TryGetComponent<Note>(out _))
             {
                 _interactView.gameObject.SetActive(false);
 
@@ -44,10 +45,12 @@ namespace Notes
 
         private void OnInteracted()
         {
-            if (_active == null)
+            if (_lastResult.collider == null)
             {
                 return;
             }
+
+            Instantiate(_projectorPrefab, transform.position + transform.forward * 0.1f, transform.rotation);
         }
     }
 }
