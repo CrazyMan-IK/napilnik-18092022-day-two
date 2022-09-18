@@ -6,7 +6,7 @@ using CharacterMovement.Interfaces;
 namespace CharacterMovement
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Movement : MonoBehaviour
+    public class Movement : MonoBehaviour, IReadOnlyMovement
     {
         [SerializeField] private float _maxSpeed = 10;
         [SerializeField] private float _accelerationSpeedMultiplier = 10;
@@ -16,6 +16,8 @@ namespace CharacterMovement
         private Rigidbody _rigidbody = null;
         private Vector3 _lastDirection = Vector3.forward;
         private Vector3 _euler = Vector3.zero;
+
+        public Vector3 RotationEuler => _euler;
 
         private void Awake()
         {
@@ -67,5 +69,10 @@ namespace CharacterMovement
                 _lastDirection = direction;
             }
         }
+    }
+
+    public interface IReadOnlyMovement
+    {
+        Vector3 RotationEuler {get;}
     }
 }
