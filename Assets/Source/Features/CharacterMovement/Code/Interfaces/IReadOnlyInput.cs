@@ -10,6 +10,6 @@ namespace CharacterMovement.Interfaces
         Transform transform { get; }
         Vector2 Direction { get; }
         Vector2 MouseDelta { get; }
-        bool IsLocked { get; }
+        bool IsCursorLocked { get; }
     }
 }
