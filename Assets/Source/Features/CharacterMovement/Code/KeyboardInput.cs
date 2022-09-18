@@ -33,6 +33,11 @@ namespace CharacterMovement
             y = Input.GetAxisRaw("Mouse Y");
 
             MouseDelta = new Vector2(x, y) * _sensitivity;
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                InteractKeyPressed?.Invoke();
+            }
         }
     }
 }
