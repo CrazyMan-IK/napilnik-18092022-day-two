@@ -30,6 +30,7 @@ namespace CharacterMovement
 
             Direction = newDirection;
 
+            MouseDelta = Vector2.zero;
             if (IsCursorLocked)
             {
                 x = Input.GetAxisRaw("Mouse X");
