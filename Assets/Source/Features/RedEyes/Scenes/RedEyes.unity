@@ -1478,6 +1478,14 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 17014974}
+    - target: {fileID: 6992744931928517770, guid: c25b238a25bba374bbe1160734ffcd6d, type: 3}
+      propertyPath: _spawnDelayInSeconds
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6992744931928517770, guid: c25b238a25bba374bbe1160734ffcd6d, type: 3}
+      propertyPath: _spawnDistanceToTarget.m_ConstantMax
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6992744931928517771, guid: c25b238a25bba374bbe1160734ffcd6d, type: 3}
       propertyPath: m_RootOrder
       value: 2

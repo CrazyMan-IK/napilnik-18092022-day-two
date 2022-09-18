@@ -10,6 +10,7 @@ namespace RedEyes
         [SerializeField] private RedEyes _eyesTemplate;
         [SerializeField] private MinMaxCurve _spawnDistanceToTarget = new MinMaxCurve(1, new AnimationCurve(), new AnimationCurve());
         [SerializeField] private float _spawnDelayInSeconds = 150;
+        [SerializeField] private float _offsetY = 0.5f;
 
         private void Start()
         {
@@ -23,7 +24,8 @@ namespace RedEyes
                 yield return new WaitForSeconds(_spawnDelayInSeconds);
                 
                 var spawnedEyes = Instantiate(_eyesTemplate, 
-                    _target.position + _target.forward * _spawnDistanceToTarget.Evaluate(Random.value), Quaternion.identity);
+                    _target.position + _target.forward * _spawnDistanceToTarget.Evaluate(Random.value) + Vector3.up * _offsetY, 
+                    Quaternion.identity);
                 
                 spawnedEyes.Initialize(_target);
             }
