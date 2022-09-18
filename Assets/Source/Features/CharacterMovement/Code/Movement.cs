@@ -9,6 +9,8 @@ namespace CharacterMovement
     public class Movement : MonoBehaviour
     {
         [SerializeField] private float _maxSpeed = 10;
+        [SerializeField] private float _accelerationSpeedMultiplier = 10;
+        [SerializeField] private Transform _cameraPivot = null;
         [SerializeField] private InterfaceReference<IReadOnlyInput> _input = null;
 
         private Rigidbody _rigidbody = null;
@@ -30,7 +32,8 @@ namespace CharacterMovement
             _euler.x = Mathf.Clamp(_euler.x - _input.Value.MouseDelta.y, -90, 90);
             _euler.y += _input.Value.MouseDelta.x;
 
-            _rigidbody.MoveRotation(Quaternion.Euler(_euler));// Quaternion.Lerp(_rigidbody.rotation, Quaternion.LookRotation(direction, Vector3.up), _rotationSpeed * Time.deltaTime));
+            _cameraPivot.localRotation = Quaternion.Euler(_euler.x, 0, 0);
+            _rigidbody.MoveRotation(Quaternion.Euler(0, _euler.y, 0));
         }
 
         private void FixedUpdate()
@@ -48,7 +51,7 @@ namespace CharacterMovement
                 direction = _lastDirection;
                 mag = 0;
             }
-            _rigidbody.velocity = _maxSpeed * mag * (_rigidbody.rotation * direction);
+            _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, _maxSpeed * mag * (_rigidbody.rotation * direction), Time.deltaTime * _accelerationSpeedMultiplier);
 
             if (mag > 0)
             {
