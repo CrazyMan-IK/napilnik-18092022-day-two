@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 
 namespace CharacterMovement.Interfaces
 {
     public interface IReadOnlyInput
     {
-        Transform transform { get; }
+        event Action InteractKeyPressed;
+        event Action JournalKeyPressed;
+
         Vector2 Direction { get; }
         Vector2 MouseDelta { get; }
-        bool IsLocked { get; }
+        bool IsCursorLocked { get; }
     }
 }
