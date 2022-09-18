@@ -159,8 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753bc61803d2a5b4c8a67a00740a441d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 10
-  _accelerationSpeedMultiplier: 10
+  _maxSpeed: 5
+  _accelerationSpeedMultiplier: 5
   _cameraPivot: {fileID: 2724557632206619328}
   _input:
     _underlyingValue: {fileID: 0}
