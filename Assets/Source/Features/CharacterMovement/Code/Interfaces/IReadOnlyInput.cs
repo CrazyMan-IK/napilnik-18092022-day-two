@@ -6,8 +6,8 @@ namespace CharacterMovement.Interfaces
     public interface IReadOnlyInput
     {
         event Action InteractKeyPressed;
+        event Action JournalKeyPressed;
 
-        Transform transform { get; }
         Vector2 Direction { get; }
         Vector2 MouseDelta { get; }
         bool IsCursorLocked { get; }
