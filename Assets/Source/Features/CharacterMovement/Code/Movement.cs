@@ -43,6 +43,12 @@ namespace CharacterMovement
                 return;
             }
 
+            if (_input.Value.Direction == Vector2.zero)
+            {
+                _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y;
+                return;
+            }
+
             var direction = _input.Value.Direction.AsXZ();
             var mag = direction.magnitude;
 
@@ -51,7 +57,10 @@ namespace CharacterMovement
                 direction = _lastDirection;
                 mag = 0;
             }
-            _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, _maxSpeed * mag * (_rigidbody.rotation * direction), Time.deltaTime * _accelerationSpeedMultiplier);
+
+            var newVelocity = Vector3.Lerp(_rigidbody.velocity, _maxSpeed * mag * (_rigidbody.rotation * direction), Time.deltaTime * _accelerationSpeedMultiplier);
+            newVelocity.y = _rigidbody.velocity.y;
+            _rigidbody.velocity = newVelocity;
 
             if (mag > 0)
             {
